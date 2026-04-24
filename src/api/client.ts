@@ -6,7 +6,7 @@
 // This means contract changes surface immediately as type errors.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import axios, { type AxiosInstance, type AxiosResponse, AxiosError } from "axios";
+import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 import type { CreateOrderRequest, UpdateOrderRequest, CreateTraderRequest } from "../types.js";
 
 export interface ApiClientConfig {

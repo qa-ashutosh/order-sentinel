@@ -63,7 +63,7 @@ export class KafkaAdapter implements BrokerAdapter {
     this.connected = false;
   }
 
-  async publish<T>(subject: string, data: T): Promise<void> {
+  async publish<T>(subject: string, _data: T): Promise<void> {
     this.assertConnected();
     // Kafka uses "topics" — subject maps directly to topic name
     // await this.producer.send({
@@ -75,7 +75,7 @@ export class KafkaAdapter implements BrokerAdapter {
 
   async subscribe<T>(
     subject: string,
-    handler: MessageHandler<T>
+    _handler: MessageHandler<T>
   ): Promise<() => Promise<void>> {
     this.assertConnected();
     // await this.consumer.subscribe({ topic: subject, fromBeginning: false });
@@ -91,7 +91,7 @@ export class KafkaAdapter implements BrokerAdapter {
     };
   }
 
-  async waitForMessage<T>(subject: string, timeoutMs = 10_000): Promise<MessageEnvelope<T>> {
+  async waitForMessage<T>(subject: string, ___timeoutMs = 10_000): Promise<MessageEnvelope<T>> {
     // Implemented via subscribe + Promise race with timeout
     // Same pattern as NATS adapter
     throw new Error("[Kafka] waitForMessage: implement with kafkajs consumer");
@@ -100,7 +100,7 @@ export class KafkaAdapter implements BrokerAdapter {
   async collectMessages<T>(
     subject: string,
     count: number,
-    timeoutMs = 15_000
+    _timeoutMs = 15_000
   ): Promise<MessageEnvelope<T>[]> {
     throw new Error("[Kafka] collectMessages: implement with kafkajs consumer");
   }

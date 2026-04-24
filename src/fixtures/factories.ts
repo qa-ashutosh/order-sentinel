@@ -19,9 +19,6 @@ import type {
   TraderProfile,
   Fill,
   RiskLimits,
-  OrderSide,
-  OrderType,
-  TimeInForce,
 } from "../types.js";
 
 // ── Symbols ───────────────────────────────────────────────────────────────────
@@ -236,14 +233,12 @@ export function makePartialFills(
   symbol: TradingSymbol = SYMBOLS.BTC_USDT
 ): Fill[] {
   const fills: Fill[] = [];
-  let remaining = totalQuantity;
   const slices = [0.3, 0.4, 0.3]; // 30/40/30 split
   const priceVariance = basePrice * 0.001; // 0.1% price movement between fills
 
   for (const slice of slices) {
     const qty = parseFloat((totalQuantity * slice).toFixed(8));
     const priceOffset = (Math.random() - 0.5) * 2 * priceVariance;
-    remaining -= qty;
 
     fills.push(makeFill(orderId, traderId, {
       filledQuantity: qty,

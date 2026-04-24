@@ -17,13 +17,10 @@ import { describe, it, expect } from "vitest";
 import {
   CreateOrderSchema,
   OrderSchema,
-  FillSchema,
   CreateTraderSchema,
-  TraderProfileSchema,
   OrderCreatedEventSchema,
   OrderFilledEventSchema,
   OrderRejectedEventSchema,
-  RiskCheckRequestedEventSchema,
   TraderLimitBreachedEventSchema,
   ApiErrorSchema,
 } from "../../src/contracts/schemas.js";
