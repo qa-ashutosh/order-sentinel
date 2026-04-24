@@ -26,7 +26,7 @@ export default defineConfig({
 
     coverage: {
       provider: "v8",
-      reporter: ["text", "lcov", "html"],
+      reporter: ["text", "lcov", "html", "json", "json-summary"],
       reportsDirectory: "coverage",
       exclude: [
         "node_modules/**",
@@ -36,8 +36,8 @@ export default defineConfig({
         "mock/**",
         "**/*.config.*",
         "**/types.ts",
-          "src/db/**",
-  "src/fixtures/**",
+        "src/db/**",
+        "src/fixtures/**",
       ],
       thresholds: {
         lines: 80,
