@@ -1,4 +1,4 @@
-<div align="center">
+<!-- <div align="center"> -->
 
 ```
  ██████╗ ██████╗ ██████╗ ███████╗██████╗
@@ -22,14 +22,14 @@
 Tests order lifecycle correctness, execution accuracy, and trading logic validity  
 across REST APIs, NATS message flows, and PostgreSQL state — built from the ground up.
 
-[![CI](https://github.com/your-username/order-sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/order-sentinel/actions/workflows/ci.yml)
+[![CI](https://github.com/qa-ashutosh/order-sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/qa-ashutosh/order-sentinel/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-4.x-6E9F18?logo=vitest)](https://vitest.dev/)
 [![Fastify](https://img.shields.io/badge/Fastify-5.x-000000?logo=fastify)](https://fastify.dev/)
 [![NATS](https://img.shields.io/badge/NATS-2.10-27AAE1)](https://nats.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-</div>
+<!-- </div> -->
 
 ---
 
