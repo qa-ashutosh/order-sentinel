@@ -14,6 +14,7 @@
 ╚════██║██╔══╝  ██║╚██╗██║   ██║   ██║██║╚██╗██║██╔══╝  ██║
 ███████║███████╗██║ ╚████║   ██║   ██║██║ ╚████║███████╗███████╗
 ╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
+
 ```
 
 **Production-grade QA framework for Order & Profile Management Systems in prop trading.**
@@ -186,12 +187,12 @@ The integration suite uses Testcontainers to spin up a real NATS server, then va
 Every valid state transition is tested. Every invalid one is tested to be rejected.
 
 ```
-         NEW  ──risk check──►  PENDING  ──partial fill──►  PARTIALLY_FILLED
-          │                       │                                │
-          │                  risk fails                        full fill
-          │                       │                                │
-          ▼                       ▼                                ▼
-      CANCELLED              REJECTED                          FILLED
+         NEW   ──risk check──►   PENDING   ──partial fill──►    PARTIALLY_FILLED
+          │                         │                                 │
+          │                     risk fails                        full fill
+          │                         │                                 │
+          ▼                         ▼                                 ▼
+      CANCELLED                  REJECTED                          FILLED
 
       (cancel from NEW, PENDING, or PARTIALLY_FILLED)
       EXPIRED (time-in-force elapsed)
@@ -255,7 +256,9 @@ BROKER_TYPE=rabbitmq  RABBITMQ_URL=amqp://localhost:5672
 ## Documentation
 
 - [Architecture](./docs/ARCHITECTURE.md) — system design, mock OMS routes, NATS subject map
-- [Adding Tests](./docs/ADDING-TESTS.md) — guide for contributing new test scenarios
+- [Mock OMS API](./docs/MOCK-OMS-API.md) — full REST reference with curl examples for manual testing
+- [Test Guide](./docs/TEST-GUIDE.md) — deep dive into each suite, extension and contribution guide
+- [Adding Tests](./docs/ADDING-TESTS.md) — quick reference for contributing new test scenarios
 - [Changelog](./CHANGELOG.md) — version history and roadmap
 
 ---

@@ -31,7 +31,6 @@ import {
   listOrders,
   updateOrder,
   getFills,
-  getAuditTrail,
   resetStore,
 } from "./store.js";
 import { runRiskChecks, isValidTransition } from "./risk.js";

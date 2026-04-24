@@ -11,16 +11,14 @@
 //   - Request/Reply: synchronous-style messaging over async transport
 // ─────────────────────────────────────────────────────────────────────────────
 
-import {
-  connect,
-  NatsConnection,
-  Subscription,
-  JSONCodec,
-  StringCodec,
-  NatsError,
-  Msg,
-} from "nats";
-import type { BrokerAdapter, BrokerConfig, MessageEnvelope, MessageHandler } from "../adapter.js";
+import type { NatsConnection, Subscription, Msg } from "nats";
+import { connect, JSONCodec, StringCodec } from "nats";
+import type {
+  BrokerAdapter,
+  BrokerConfig,
+  MessageEnvelope,
+  MessageHandler,
+} from "../adapter.js";
 
 const jc = JSONCodec();
 const sc = StringCodec();
@@ -68,7 +66,7 @@ export class NatsAdapter implements BrokerAdapter {
   async publish<T>(
     subject: string,
     data: T,
-    headers?: Record<string, string>
+    _headers?: Record<string, string>,
   ): Promise<void> {
     this.assertConnected();
 
@@ -78,7 +76,7 @@ export class NatsAdapter implements BrokerAdapter {
 
   async subscribe<T>(
     subject: string,
-    handler: MessageHandler<T>
+    handler: MessageHandler<T>,
   ): Promise<() => Promise<void>> {
     this.assertConnected();
 
@@ -95,7 +93,9 @@ export class NatsAdapter implements BrokerAdapter {
             data,
             timestamp: new Date(),
           };
-          await handler(envelope as MessageEnvelope<unknown> as MessageEnvelope<T>);
+          await handler(
+            envelope as MessageEnvelope<unknown> as MessageEnvelope<T>,
+          );
         } catch (err) {
           console.error(`[NATS] Error handling message on ${subject}:`, err);
         }
@@ -110,15 +110,15 @@ export class NatsAdapter implements BrokerAdapter {
 
   async waitForMessage<T>(
     subject: string,
-    timeoutMs: number = 10_000
+    timeoutMs: number = 10_000,
   ): Promise<MessageEnvelope<T>> {
     return new Promise<MessageEnvelope<T>>((resolve, reject) => {
       const timer = setTimeout(() => {
         unsub();
         reject(
           new Error(
-            `[NATS] Timeout waiting for message on subject "${subject}" after ${timeoutMs}ms`
-          )
+            `[NATS] Timeout waiting for message on subject "${subject}" after ${timeoutMs}ms`,
+          ),
         );
       }, timeoutMs);
 
@@ -137,7 +137,7 @@ export class NatsAdapter implements BrokerAdapter {
   async collectMessages<T>(
     subject: string,
     count: number,
-    timeoutMs: number = 15_000
+    timeoutMs: number = 15_000,
   ): Promise<MessageEnvelope<T>[]> {
     return new Promise<MessageEnvelope<T>[]>((resolve, reject) => {
       const collected: MessageEnvelope<T>[] = [];
@@ -146,8 +146,8 @@ export class NatsAdapter implements BrokerAdapter {
         unsub();
         reject(
           new Error(
-            `[NATS] Timeout collecting ${count} messages on "${subject}". Got ${collected.length}/${count} in ${timeoutMs}ms`
-          )
+            `[NATS] Timeout collecting ${count} messages on "${subject}". Got ${collected.length}/${count} in ${timeoutMs}ms`,
+          ),
         );
       }, timeoutMs);
 
@@ -189,7 +189,7 @@ export class NatsAdapter implements BrokerAdapter {
   private assertConnected(): void {
     if (!this.connection || this.connection.isClosed()) {
       throw new Error(
-        "[NATS] Adapter is not connected. Call connect() before publishing or subscribing."
+        "[NATS] Adapter is not connected. Call connect() before publishing or subscribing.",
       );
     }
   }

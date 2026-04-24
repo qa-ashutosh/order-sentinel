@@ -22,8 +22,6 @@ export interface DbConfig {
   ssl?: boolean;
 }
 
-let _sql: Sql | null = null;
-
 export function createDbClient(config: DbConfig): Sql {
   return postgres({
     host: config.host,

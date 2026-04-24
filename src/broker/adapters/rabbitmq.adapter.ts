@@ -47,7 +47,7 @@ export class RabbitMQAdapter implements BrokerAdapter {
     this.connected = false;
   }
 
-  async publish<T>(subject: string, data: T): Promise<void> {
+  async publish<T>(subject: string, _data: T): Promise<void> {
     this.assertConnected();
     // RabbitMQ uses exchange + routing key
     // subject maps to routing key e.g. "orders.created"
@@ -62,7 +62,7 @@ export class RabbitMQAdapter implements BrokerAdapter {
 
   async subscribe<T>(
     subject: string,
-    handler: MessageHandler<T>
+    _handler: MessageHandler<T>
   ): Promise<() => Promise<void>> {
     this.assertConnected();
     // const q = await this.channel.assertQueue("", { exclusive: true, autoDelete: true });
@@ -79,14 +79,14 @@ export class RabbitMQAdapter implements BrokerAdapter {
     };
   }
 
-  async waitForMessage<T>(subject: string, timeoutMs = 10_000): Promise<MessageEnvelope<T>> {
+  async waitForMessage<T>(subject: string, ___timeoutMs = 10_000): Promise<MessageEnvelope<T>> {
     throw new Error("[RabbitMQ] waitForMessage: implement with amqplib consumer");
   }
 
   async collectMessages<T>(
     subject: string,
     count: number,
-    timeoutMs = 15_000
+    _timeoutMs = 15_000
   ): Promise<MessageEnvelope<T>[]> {
     throw new Error("[RabbitMQ] collectMessages: implement with amqplib consumer");
   }
