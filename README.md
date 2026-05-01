@@ -292,3 +292,11 @@ order-sentinel/
 Built to validate prop trading systems at the level they deserve.
 
 </div>
+
+<div align="center">
+
+---
+
+*If order-sentinel has saved you from a bad deploy, a ⭐ on GitHub tells the next engineer it's worth their time.*
+
+</div>
